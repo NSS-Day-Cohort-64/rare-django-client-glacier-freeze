@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+/* import { useEffect, useState } from "react";
 import { getUserById } from "../../managers/users";
 
 export const SubscribedUserPosts = ({token}) => {
@@ -55,4 +55,4 @@ export const SubscribedUserPosts = ({token}) => {
             
         </>
     );
-};
+}; */
