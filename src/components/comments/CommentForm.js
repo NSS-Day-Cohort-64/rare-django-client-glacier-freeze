@@ -2,12 +2,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { postComment } from "../../managers/comments";
 import { useEffect, useState } from "react";
 import { getPostById } from "../../managers/posts";
+import { getUserByToken } from "../../managers/tokens";
 
-export const CommentForm = ({ token }) => {
+export const CommentForm = () => {
     const { postId } = useParams()
+    const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
+    const [currentUser, setCurrentUser]= useState()
     const [ comment, setComment ] = useState({
-        post_id: 0,
-        author_id: 0,
+        post: 0,
+        author: 0,
         content: ""
     })
     const [post, setPost] = useState({})
@@ -20,17 +23,24 @@ export const CommentForm = ({ token }) => {
         }
     }, [postId])
 
+    useEffect(() => {
+        if (token) {
+            getUserByToken(token).then(data => setCurrentUser(data.user))
+        }
+    }, [token])
+
+
     const handleSaveButtonClick = (event) => {
         event.preventDefault();
 
         const commentToSendToAPI = {
-            post_id: post.id,
-            author_id: parseInt(token),
+            post: post.id,
+            author: currentUser.id,
             content: comment.content
         }
         postComment(commentToSendToAPI)
             .then(() => {
-                navigate(`/comments/${postId}`);
+                navigate(`/posts/${postId}`);
             });
     };
 
