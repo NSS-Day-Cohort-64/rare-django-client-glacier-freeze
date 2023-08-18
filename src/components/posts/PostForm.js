@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "../../managers/categories";
 import { getTags, postTagRelationships } from "../../managers/TagManager";
+import { getUserByToken } from "../../managers/tokens";
 
 
-export const PostForm = ({ token }) => {
+export const PostForm = () => {
     /*
         TODO: Add the correct default properties to the
         initial state object
     */
     const [categories, setCategories] = useState([]);
     const [formError, setFormError] = useState(false);
+    const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
+    const [currentUser, setCurrentUser]= useState()
+
 
     // Default state for all tags to list on form
     const [tagList, setTagList] = useState([])
@@ -19,8 +23,8 @@ export const PostForm = ({ token }) => {
 
 
     const [post, update] = useState({
-        user_id: 0,
-        category_id: 0,
+        user: 0,
+        category: 0,
         title: "",
         publication_date: new Date().toISOString().split('T')[0],
         image_url: "",
@@ -43,28 +47,35 @@ export const PostForm = ({ token }) => {
         []
     )
 
+    useEffect(() => {
+        if (token) {
+            getUserByToken(token).then(data => setCurrentUser(data.user))
+        }
+    }, [token])
+
     const navigate = useNavigate();
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault();
-        if (!post.title || post.category_id === 0 || !post.content) {
+        if (!post.title || post.category === 0 || !post.content) {
             setFormError(true);
             return;
         }
         const messageToSendToAPI = {
-            user_id: parseInt(token),
-            category_id: post?.category?.id,
+            user: currentUser.id,
+            category: post.category,
             title: post.title,
-            publication_date: post.publication_date,
+            publication_date: post.publication_date, 
             image_url: post.image_url,
             content: post.content,
-            approved: 1
+            approved: true
         };
     
         fetch("http://localhost:8000/posts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json",
                 "Authorization": `Token ${localStorage.getItem("auth_token")}`
             },
             body: JSON.stringify(messageToSendToAPI)
@@ -77,6 +88,7 @@ export const PostForm = ({ token }) => {
         
             navigate(`/posts/${createdPostId}`);
         });
+    }
         
 
     //     fetch(`http://localhost:8088/posts`, {
@@ -144,7 +156,7 @@ export const PostForm = ({ token }) => {
                         value={post?.category?.id}
                         onChange={(evt) => {
                             const copy = { ...post };
-                            copy.category_id = parseInt(evt.target.value);
+                            copy.category = parseInt(evt.target.value);
                             update(copy);
                         }}
                         className="form-control"
