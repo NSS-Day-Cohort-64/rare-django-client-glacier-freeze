@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { getCommentsByPost } from "../../managers/comments"
+import { getCommentsByPost, del, deleteComment } from "../../managers/comments"
 import { getPostById } from "../../managers/posts"
+import { getUserByToken } from "../../managers/tokens";
 
-export const PostComments = ({ token }) => {
+export const PostComments = () => {
     const { postId } = useParams()
     const [ comments, setComments ] = useState([])
     const [post, setPost] = useState({})
+    const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
+    const [currentUser, setCurrentUser]= useState()
 
     const navigate = useNavigate()
 
@@ -17,13 +20,17 @@ export const PostComments = ({ token }) => {
         }
     }, [postId])
 
+    useEffect(() => {
+      if (token) {
+          getUserByToken(token).then(data => setCurrentUser(data.user))
+      }
+  }, [token])
+
     const deleteButton = (comment) => {
         return (
           <button
             onClick={() => {
-              fetch(`http://localhost:8088/comments/${comment.id}`, {
-                method: "DELETE"
-              }).then(() => {
+              deleteComment(comment.id).then(() => {
                 getCommentsByPost(postId).then(foundComments => setComments(foundComments));
               });
             }}
@@ -43,8 +50,8 @@ export const PostComments = ({ token }) => {
                     return <section className="comment" key={`comment--${comment.id}`}>
                     <div>==============================</div>
                     <div>Comment: {comment.content}</div>
-                    <div>User: {comment.user.first_name} {comment.user.last_name}</div>
-                    {comment.author_id === parseInt(token) ? (
+                    <div>User: {comment.author.full_name}</div>
+                    {comment.author.id === currentUser.id ? (
                         deleteButton(comment)
                     )
                     : (<div></div>)}
