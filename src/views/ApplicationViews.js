@@ -14,7 +14,7 @@ import { UserDetail } from "../components/users/UserDetail"
 import { PostComments } from "../components/comments/PostComments"
 import { CommentForm } from "../components/comments/CommentForm"
 
-import { SubscribedUserPosts } from "../components/subscriptions/ViewSubscribedUserPosts"
+//import { SubscribedUserPosts } from "../components/subscriptions/ViewSubscribedUserPosts"
 
 export const ApplicationViews = ({ token, setToken}) => {
   return <>
