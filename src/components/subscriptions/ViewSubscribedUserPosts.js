@@ -1,4 +1,4 @@
-// import { useEffect, useState } from "react";
+/* // import { useEffect, useState } from "react";
 // import { getUserById } from "../../managers/users";
 
 // export const SubscribedUserPosts = ({token}) => {
@@ -50,9 +50,11 @@
 //                 </ul>
 //             ) : (
 //                 <p>{subscribedPosts?.message}</p>
-
+//
 //             )}
-            
-//         </>
-//     );
-// };
+ //           
+//        </>
+//    );
+//};
+//
+ */
