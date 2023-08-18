@@ -9,6 +9,7 @@ export const Register = ({ setToken }) => {
   const email = useRef()
   const username = useRef()
   const bio = useRef()
+  const profileImageUrl = useRef()
   const password = useRef()
   const verifyPassword = useRef()
   const passwordDialog = useRef()
@@ -25,7 +26,7 @@ export const Register = ({ setToken }) => {
         email: email.current.value,
         password: password.current.value,
         bio: bio.current.value,
-        profile_image_url: ""
+        profile_image_url: profileImageUrl.current.value
       }
 
       registerUser(newUser)
@@ -91,11 +92,19 @@ export const Register = ({ setToken }) => {
         </div>
 
         <div className="field">
+          <label className="label">Profile Image</label>
+          <div className="control">
+            <input className="input" placeholder="Add a link to an image for your profile" ref={profileImageUrl}/>
+          </div>
+        </div>
+
+        <div className="field">
           <label className="label">Bio</label>
           <div className="control">
             <textarea className="textarea" placeholder="Tell us about yourself..." ref={bio}></textarea>
           </div>
         </div>
+
 
         <div className="field is-grouped">
           <div className="control">

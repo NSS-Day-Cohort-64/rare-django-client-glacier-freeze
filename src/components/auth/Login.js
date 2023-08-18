@@ -28,13 +28,13 @@ export const Login = ({ setToken }) => {
   }
   /*--------------------------------------------------------------------*/
   // Autofill Username/Password by default streamline devolopment process 
-  useEffect(
+ /*  useEffect(
     () => {
-      username.current.value = "lameguy"
-      password.current.value = "passwd"
+      email.current.value = "jonathanislame@aol.com"
+      password.current.value = "password"
     },
     []
-  )
+  ) */
   /*--------------------------------------------------------------------*/
   return (
     <section className="columns is-centered">
@@ -65,7 +65,7 @@ export const Login = ({ setToken }) => {
           </div>
         </div>
         {
-          isUnsuccessful ? <p className="help is-danger">Username or password not valid</p> : ''
+          isUnsuccessful ? <p className="help is-danger">Email or password not valid</p> : ''
         }
       </form>
     </section>
