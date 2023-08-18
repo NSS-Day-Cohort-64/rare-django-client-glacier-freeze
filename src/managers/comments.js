@@ -1,11 +1,11 @@
 export const getCommentsByPost = (postId) => {
-    return fetch(`http://localhost:8088/comments?post_id=${postId}`)
+    return fetch(`http://localhost:8000/comments?post_id=${postId}`)
     .then(res => res.json())
 }
 
 
 export const postComment = (comment) => {
-    return fetch(`http://localhost:8088/comments`, {
+    return fetch(`http://localhost:8000/comments`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

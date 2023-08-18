@@ -28,13 +28,13 @@ export const Login = ({ setToken }) => {
   }
   /*--------------------------------------------------------------------*/
   // Autofill Username/Password by default streamline devolopment process 
- /*  useEffect(
+   useEffect(
     () => {
-      email.current.value = "jonathanislame@aol.com"
-      password.current.value = "password"
+      username.current.value = "jonathanislame@aol.com"
+      password.current.value = "lemmon"
     },
     []
-  ) */
+  ) 
   /*--------------------------------------------------------------------*/
   return (
     <section className="columns is-centered">
