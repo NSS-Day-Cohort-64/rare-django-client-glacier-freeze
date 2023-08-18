@@ -74,15 +74,10 @@ export const PostForm = ({ token }) => {
             const createdPostId = data.id;
              
             // If tags were selected, create the post/tag relationships with the new post id
-    
+        
             navigate(`/posts/${createdPostId}`);
-        })
-        .catch(error => {
-            // Handle errors appropriately
-            console.error("Fetch error:", error);
         });
-    };
-    
+        
 
     //     fetch(`http://localhost:8088/posts`, {
     //         method: "POST",
