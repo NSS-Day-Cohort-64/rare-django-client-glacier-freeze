@@ -29,8 +29,8 @@ export const TagList = () => {
 
         <div className="tags column is-full is-justify-content-space-evenly">
             {tags.map((tag) => (
-                <section className="tag" key={tag.id}>
-                  <div className="tagLabel">{tag.label}</div>
+                <section className="tag" key={tag?.id}>
+                  <div className="tagLabel">{tag?.label}</div>
                   <footer>{deleteButton()}
                   {editButton()}</footer>
                 </section>

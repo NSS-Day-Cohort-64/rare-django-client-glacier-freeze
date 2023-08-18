@@ -1,7 +1,18 @@
 export const getTags = () => {
-  return fetch("http://localhost:8000/tags")
-      .then(res => res.json())
+  return fetch("http://localhost:8000/games", {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        }
+    })
+        .then(response => response.json())
 }
+
+// const fetchSubscribedPosts = async () => {
+//         const response = await fetch("http://localhost:8088/", {
+//             headers: {
+//                 Authorization: localStorage.getItem("auth_token"),
+//             },
+//         });
 
 export const postTags = (newTag) => {
   return fetch("http://localhost:8000/tags", {
