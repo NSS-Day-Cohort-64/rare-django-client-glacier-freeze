@@ -14,7 +14,11 @@ import { UserDetail } from "../components/users/UserDetail"
 import { PostComments } from "../components/comments/PostComments"
 import { CommentForm } from "../components/comments/CommentForm"
 
+
+import { ReactionList } from "../components/reactions/reactionList.js"
+
 //import { SubscribedUserPosts } from "../components/subscriptions/ViewSubscribedUserPosts"
+
 
 export const ApplicationViews = ({ token, setToken}) => {
   return <>
@@ -31,6 +35,7 @@ export const ApplicationViews = ({ token, setToken}) => {
         <Route path="/posts/:postId" element={<PostDetails />}  />
         <Route path="/categories" element={<CategoryList />}  />
         <Route path="/comments/:postId" element={<PostComments token={token}/>}  />
+        <Route path="/reactions" element={<ReactionList token={token}/>}  />
         <Route path="/commentform/:postId" element={<CommentForm token={token}/>}  />
         
         <Route path="/users"> 
