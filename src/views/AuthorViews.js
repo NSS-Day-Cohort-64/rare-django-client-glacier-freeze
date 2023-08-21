@@ -16,41 +16,34 @@ import { CommentForm } from "../components/comments/CommentForm"
 
 
 import { ReactionList } from "../components/reactions/reactionList.js"
-import { getUserByToken } from "../managers/tokens.js"
-import { getUserById } from "../managers/users.js"
-import { StaffViews } from "./StaffViews.js"
-import { AuthorViews } from "./AuthorViews.js"
-import { useEffect, useState } from "react"
 
 //import { SubscribedUserPosts } from "../components/subscriptions/ViewSubscribedUserPosts"
 
-export const ApplicationViews = ({ token, setToken }) => {
-  token = localStorage.getItem("auth_token")
-  const [user, setUser] = useState({})
 
-  useEffect(() => {
-    if (token) {
-      getUserByToken(token)
-        .then((user) => {
-          setUser(user);
-        })
-        .catch((error) => {
-          console.error("Error fetching user:", error);
-        });
-    }
-  }, [token]);
-  
-  return (
+export const AuthorViews = ({ token, setToken}) => {
+  return <>
     <Routes>
-      <Route path="/login" element={<Login setToken={setToken} />} />
-      <Route path="/register" element={<Register setToken={setToken} />} />
       <Route element={<Authorized token={token} />}>
-        {user?.is_staff !== 0 ? (
-          <Route path="*" element={<StaffViews />} />
-        ) : (
-          <Route path="*" element={<AuthorViews />} />
-        )}
+        <Route path="/" element={<PostList/>}  />
+
+        <Route path="/tags" element={<TagList />}  />
+        <Route path="/posts" element={<PostList />}  />
+        <Route path="/my-posts" element={<UserPost token={token}/>}  />
+        <Route path="/posts/:postId" element={<PostDetails />}  />
+        <Route path="/categories" element={<CategoryList />}  />
+        <Route path="/comments/:postId" element={<PostComments token={token}/>}  />
+        <Route path="/reactions" element={<ReactionList token={token}/>}  />
+        <Route path="/commentform/:postId" element={<CommentForm token={token}/>}  />
+        
+        <Route path="/users"> 
+          <Route index element={<UserList />} />
+          <Route path=":userId" element={<UserDetail token={token}/>} />
+        </Route>
+        <Route path="/postform" element={<PostForm token={token}/>}  />
+        <Route path="/my-posts/:postId/edit" element={<PostEdit />}  />
+ 
+
       </Route>
     </Routes>
-  );
+  </>
 }
