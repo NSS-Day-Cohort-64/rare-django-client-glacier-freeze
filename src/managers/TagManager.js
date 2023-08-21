@@ -7,6 +7,7 @@ export const getTags = () => {
   .then(res => res.json());
 };
 
+
 export const postTags = (newTag) => {
   return fetch("http://localhost:8000/tags", {
       method: "POST",
@@ -19,6 +20,28 @@ export const postTags = (newTag) => {
   }).then(res => res.json());
 };
 
+export const putTag = (tag) => {
+  return fetch(`http://localhost:8000/tags/${tag.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Token ${localStorage.getItem("auth_token")}`
+    },
+    body: JSON.stringify(tag)
+  })
+}
+
+export const deleteTags = (tagId) => {
+    return fetch(`http://localhost:8000/tags/${tagId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        }
+        })
+        .then(() => {
+            window.location.reload()
+        })
+}
 export const postTagRelationships = (postId, tagsToPost) => {
   const postBody = [postId, tagsToPost];
 
