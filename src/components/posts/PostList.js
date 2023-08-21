@@ -125,10 +125,6 @@ export const PostList = () => {
 
       <article className="posts">
         {filteredPosts.map((post) => {
-          const user = users.find((user) => user.id === post.user_id) || [];
-          const category = categories.find((category) => category.id === post.category_id) || [];
-
-
           return (
             <section className="post" key={`postList--${post.id}`}>
               <div>==============================</div>
@@ -136,9 +132,9 @@ export const PostList = () => {
                 Post Title: <Link to={`/posts/${post.id}`}>{post.title}</Link>
               </div>
               <div>
-                Author: <Link to={`/users/${user.id}`}>{user.first_name} {user.last_name}</Link>
+                Author: <Link to={`/users/${post?.user?.id}`}>{post?.user?.full_name}</Link>
               </div>
-              <div>Category: {category.label}</div>
+              <div>Category: {post?.category?.label}</div>
             </section>
           );
         })}
