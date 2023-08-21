@@ -32,7 +32,7 @@ export const ReactionList = () => {
                 label: "",
                 image_url: ""
             });
-            setShowCreateForm(false); // Hide the form after creating
+            setShowCreateForm(false);
         })
     }
 
