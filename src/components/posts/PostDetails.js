@@ -37,9 +37,12 @@ export const PostDetails = () => {
         return (
             <button
                 onClick={() => {
-                    deletePost(post.id).then(() => {
-                        navigate(`/posts`)
-                    });
+                    const shouldDelete = window.confirm("Are you sure you want to delete this post?");
+                    if (shouldDelete) {
+                        deletePost(post.id).then(() => {
+                            navigate(`/posts`)
+                        });
+                    }
                 }}
                 className="submission__delete small-button"
             >
