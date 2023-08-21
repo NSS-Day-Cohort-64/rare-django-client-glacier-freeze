@@ -6,6 +6,14 @@ export const getPosts = () => {
     }).then(res => res.json());
 };
 
+export const getPostsByApproval = () => {
+    return fetch("http://localhost:8000/posts?approved=true", {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        }
+    }).then(res => res.json());
+};
+
 export const getPostById = (id) => {
     return fetch(`http://localhost:8000/posts/${id}`, {
         headers: {

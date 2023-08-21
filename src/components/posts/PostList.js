@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getPosts, getPostsByCategory, getPostsByTag, getPostsByTitle, getPostsByUser } from "../../managers/posts";
+import { getPosts, getPostsByApproval, getPostsByTag} from "../../managers/posts";
 import { getUsers } from "../../managers/users";
 import { getCategories } from "../../managers/categories";
 import { Link } from "react-router-dom";
@@ -20,7 +20,7 @@ export const PostList = () => {
   const [titleInput, setTitleInput] = useState(""); // New state to track the input field value
 
   useEffect(() => {
-    getPosts().then((postsData) => setPosts(postsData));
+    getPostsByApproval().then((postsData) => setPosts(postsData));
     getUsers().then((usersData) => setUsers(usersData));
     getCategories().then((categoriesData) => setCategories(categoriesData));
     getTags().then((tagData) => setTags(tagData));
