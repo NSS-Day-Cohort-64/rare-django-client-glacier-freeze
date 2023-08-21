@@ -10,6 +10,7 @@ export const Rare = () => {
     localStorage.setItem('auth_token', newToken)
     setTokenState(newToken)
   }
+  
 
   return <>
     <NavBar token={token} setToken={setToken} />

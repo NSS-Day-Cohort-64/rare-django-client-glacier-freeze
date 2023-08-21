@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { getUserById } from "../../managers/users";
 import { useNavigate, useParams } from "react-router-dom";
-import { addSubscription, getAllSubscriptions, deleteSubscription } from "../../managers/subscriptions";
+//import { addSubscription, getAllSubscriptions, deleteSubscription } from "../../managers/subscriptions";
 
 export const UserDetail = ({ token }) => {
     const [user, setUser] = useState()
-    const [subscriptions, setSubscriptions] = useState([])
-    const [alreadySubscribed, setSubscribed] = useState()
+    //const [subscriptions, setSubscriptions] = useState([])
+    //const [alreadySubscribed, setSubscribed] = useState()
     let navigate = useNavigate()
     const { userId } = useParams()
 
@@ -15,7 +15,7 @@ export const UserDetail = ({ token }) => {
             .then(setUser)
     }, [userId])
 
-    useEffect(() => {
+    /* useEffect(() => {
         getAllSubscriptions().then(data => setSubscriptions(data));
       }, [])
 
@@ -48,24 +48,23 @@ export const UserDetail = ({ token }) => {
             .then(() => {
                 navigate("/");
             })
-    }
+    } */
 
     
     
 
     return (
         <section className="userPage">
-            <h1>{user?.username}'s Page</h1>
+            <h1>{user?.full_name}'s Page</h1>
             {user?.profile_image_url && (
                 <img
                     className="user__profileIMG"
                     src={user.profile_image_url}
                 />
             )}
-            <h3 className="user__createdate">Created on: {user?.created_on}</h3>
-            <h3 className="user__fullname">Full Name: {user?.first_name} {user?.last_name}</h3>
-            <div className="user__bio">{user?.bio}</div>
-            { 
+            <div className="user__bio">Bio: {user?.bio}</div>
+            <h3 className="user__createdate">Rare User since: {user?.created_on}</h3>
+            {/* { 
                 alreadySubscribed ?
                 <button
                 onClick={() => { unsubscribeToUser() }}
@@ -78,7 +77,7 @@ export const UserDetail = ({ token }) => {
             >
                 Subscribe
             </button>
-            }
+            } */}
         </section>
     );
 };
