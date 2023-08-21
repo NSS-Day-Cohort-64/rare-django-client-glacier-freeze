@@ -1,15 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom"
-import { getPostById } from "../../managers/posts"
+import { getPostById, deletePost } from "../../managers/posts"
 import { useEffect, useState } from "react"
 import { getUsers } from "../../managers/users"
 import { getCategories } from "../../managers/categories"
 import { Link } from "react-router-dom"
+import { getUserByToken } from "../../managers/tokens"
 
 
 export const PostDetails = () => {
     const { postId } = useParams()
-    const [ post, setPost ] = useState({})
-    const [ users, setUsers ] = useState([])
+    const [post, setPost] = useState({})
+    const [users, setUsers] = useState([])
+    const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
+    const [currentUser, setCurrentUser]= useState()
 
     const navigate = useNavigate()
 
@@ -24,7 +27,29 @@ export const PostDetails = () => {
         }
     }, [postId])
 
+    useEffect(() => {
+        if (token) {
+            getUserByToken(token).then(data => setCurrentUser(data.user))
+        }
+    }, [token])
 
+    const deleteButton = (post) => {
+        return (
+            <button
+                onClick={() => {
+                    const shouldDelete = window.confirm("Are you sure you want to delete this post?");
+                    if (shouldDelete) {
+                        deletePost(post.id).then(() => {
+                            navigate(`/posts`)
+                        });
+                    }
+                }}
+                className="submission__delete small-button"
+            >
+                Delete
+            </button>
+        );
+    }
 
 
     return (
@@ -35,9 +60,13 @@ export const PostDetails = () => {
                 <div>{post?.content}</div>
                 <div>Date: {post?.publication_date}</div>
                 <div>Author: <Link to={`/users/${post?.user?.id}`}>{post?.user?.full_name}</Link></div>
+                {post?.user?.id === currentUser?.id ? (
+                    deleteButton(post)
+                )
+                    : (<div></div>)}
             </article>
-            <button onClick = {()=> {navigate(`/comments/${postId}`)}}>View Comments</button>
-            <button onClick = {()=> {navigate(`/commentform/${postId}`)}}>Add Comment</button>
+            <button onClick={() => { navigate(`/comments/${postId}`) }}>View Comments</button>
+            <button onClick={() => { navigate(`/commentform/${postId}`) }}>Add Comment</button>
         </div>
     )
 }
