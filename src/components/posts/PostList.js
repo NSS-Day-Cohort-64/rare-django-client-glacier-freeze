@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getPosts, getPostsByApproval, getPostsByTag} from "../../managers/posts";
+import { getPosts, getPostsByCategory, getPostsByTag, getPostsByTitle, getPostsByUser } from "../../managers/posts";
 import { getUsers } from "../../managers/users";
 import { getCategories } from "../../managers/categories";
 import { Link } from "react-router-dom";
@@ -15,13 +15,12 @@ export const PostList = () => {
     categoryId: 0,
     userId: 0,
     title: "",
-    tagId: 0,
-    approved: false
+    tagId: 0
   });
   const [titleInput, setTitleInput] = useState(""); // New state to track the input field value
 
   useEffect(() => {
-    getPostsByApproval().then((postsData) => setPosts(postsData));
+    getPosts().then((postsData) => setPosts(postsData));
     getUsers().then((usersData) => setUsers(usersData));
     getCategories().then((categoriesData) => setCategories(categoriesData));
     getTags().then((tagData) => setTags(tagData));
@@ -83,24 +82,6 @@ export const PostList = () => {
     setFilters({ ...filters, title: titleInput }); // Update the title filter
   };
 
-  const handleApprovePost = (postId) => {
-  // Assuming you have a function to update the post's approval status
-  // Replace this with your actual function to update the post's approval status
-  updatePostApproval(postId).then(() => {
-    // Once the approval status is updated on the server, update the state
-    // Find the post in the filteredPosts array and update its approval status
-    const updatedFilteredPosts = filteredPosts.map((post) => {
-      if (post.id === postId) {
-        return { ...post, approved: true };
-      }
-      return post;
-    });
-
-    setFilteredPosts(updatedFilteredPosts);
-  });
-};
-
-
   return (
     <div style={{ margin: "0rem 3rem" }}>
       <h1>Posts</h1>
@@ -154,10 +135,7 @@ export const PostList = () => {
                 Author: <Link to={`/users/${post?.user?.id}`}>{post?.user?.full_name}</Link>
               </div>
               <div>Category: {post?.category?.label}</div>
-              <button onClick={() => handleApprovePost(post.id)}>
-Approve Post</button>
             </section>
-            
           );
         })}
       </article>
