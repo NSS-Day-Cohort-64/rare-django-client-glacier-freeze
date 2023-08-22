@@ -10,7 +10,6 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
     <Routes>
       <Route path="/login" element={<Login setToken={setToken} setStaff={setStaff} />} />
       <Route path="/register" element={<Register setToken={setToken} setStaff={setStaff} />} />
-        <Route path="/tags/:postId" element={<ManagePostTags />}  />
       <Route element={<Authorized token={token} staff={staff} />}>
         {staff === true ? (
           <Route path="*" element={<StaffViews />} />
