@@ -35,14 +35,14 @@ export const PostList = () => {
 
     if (filters.categoryId !== 0) {
       filteredResults = filteredResults.filter(
-        (post) => post.category_id === filters.categoryId
+        (post) => post?.category?.id === filters.categoryId
       );
     }
  
 
     if (filters.userId !== 0) {
       filteredResults = filteredResults.filter(
-        (post) => post.user_id === filters.userId
+        (post) => post?.user?.id === filters.userId
       );
     }
 
@@ -101,7 +101,7 @@ export const PostList = () => {
           <option value={0}>Filter By Author</option>
           {users.map((user) => (
             <option key={`userFilter--${user.id}`} value={user.id}>
-              {user.first_name} {user.last_name}
+              {user.full_name}
             </option>
           ))}
         </select>
