@@ -23,7 +23,6 @@ import { ReactionList } from "../components/reactions/reactionList.js"
 export const AuthorViews = ({ token, setToken}) => {
   return <>
     <Routes>
-      <Route element={<Authorized token={token} />}>
         <Route path="/" element={<PostList/>}  />
 
         <Route path="/tags" element={<TagList />}  />
@@ -41,9 +40,7 @@ export const AuthorViews = ({ token, setToken}) => {
         </Route>
         <Route path="/postform" element={<PostForm token={token}/>}  />
         <Route path="/my-posts/:postId/edit" element={<PostEdit />}  />
- 
-
-      </Route>
+        
     </Routes>
   </>
 }
