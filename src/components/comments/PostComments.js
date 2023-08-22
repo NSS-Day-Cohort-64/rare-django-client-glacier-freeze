@@ -5,7 +5,9 @@ import { getPostById } from "../../managers/posts"
 import { getUserByToken } from "../../managers/tokens";
 
 export const PostComments = () => {
-    const { postId } = useParams()
+    const { postId, commentId } = useParams(); // Use useParams() once to extract both parameters
+
+
     const [ comments, setComments ] = useState([])
     const [post, setPost] = useState({})
     const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
@@ -42,26 +44,30 @@ export const PostComments = () => {
       }
 
 
-    return (
+      return (
         <div style={{ margin: "0rem 3rem" }}>
             <h1>Comments for "{post.title}"</h1>
-            {
-                comments.map(comment => {
-                    return <section className="comment" key={`comment--${comment.id}`}>
+            {comments.map(comment => (
+                <section className="comment" key={`comment--${comment.id}`}>
                     <div>==============================</div>
                     <div>Comment: {comment.content}</div>
                     <div>User: {comment.author.full_name}</div>
                     {comment.author.id === currentUser.id ? (
-                        deleteButton(comment)
-                    )
-                    : (<div></div>)}
+                        <div>
+                            {deleteButton(comment)}
+                            <button onClick={() => navigate(`/comments/${comment.id}/edit`)}>
+                                Edit Comment
+                            </button>
+                        </div>
+                    ) : (
+                        <div></div>
+                    )}
                 </section>
-                })
-            }
-            <button onClick = {()=> {navigate(`/commentform/${postId}`)}}>Add Comment</button>
-
+            ))}
+            <button onClick={() => navigate(`/commentform/${postId}`)}>Add Comment</button>
         </div>
-    )
+    );
+    
 
 
 }
