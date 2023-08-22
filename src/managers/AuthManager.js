@@ -3,7 +3,8 @@ export const loginUser = (user) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json"
+      "Accept": "application/json",
+      // "Authorization": `Token ${localStorage.getItem("auth_token")}`
     },
     body: JSON.stringify({
       username: user.username,
@@ -17,7 +18,8 @@ export const registerUser = (newUser) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json"
+      "Accept": "application/json",
+      // "Authorization": `Token ${localStorage.getItem("auth_token")}`
     },
     body: JSON.stringify(newUser)
   }).then(res => res.json())

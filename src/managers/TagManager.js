@@ -45,7 +45,7 @@ export const deleteTags = (tagId) => {
 export const postTagRelationships = (postId, tagsToPost) => {
   const postBody = [postId, tagsToPost];
 
-  return fetch("http://localhost:8000/post_tags", {
+  return fetch("http://localhost:8000/posttags", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

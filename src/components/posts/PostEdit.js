@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getCategories } from "../../managers/categories";
 import { getPostById, putPost } from "../../managers/posts";
-import { deleteTagRelationships, getPostTagsByPostId, getTags, postTagRelationships } from "../../managers/TagManager";
+// import { deleteTagRelationships, getPostTagsByPostId, getTags, postTagRelationships } from "../../managers/TagManager";
 
 
 
@@ -20,8 +20,8 @@ export const PostEdit = () => {
     const [tagsToAdd, updateTagsToAdd] = useState([])
 
     const [post, updatePost] = useState({
-        user_id: 0,
-        category_id: 0,
+        user: 0,
+        category: 0,
         title: "",
         publication_date: new Date().toISOString().split('T')[0],
         image_url: "",
@@ -49,26 +49,26 @@ export const PostEdit = () => {
             });
     }, []);
 
-    useEffect(
-        () => {
-            getTags()
-                .then(tagData => setTagList(tagData))
-        },
-        []
-    )
+    // useEffect(
+    //     () => {
+    //         getTags()
+    //             .then(tagData => setTagList(tagData))
+    //     },
+    //     []
+    // )
 
-    useEffect(
-        () => {
-            if (postId) {
-                getPostTagsByPostId(postId)
-                .then((data) => {
-                    updateTagsOnPost(data)
-                    setOriginalPostTags(data)
-                })
-            }
-        },
-        [postId]
-    )
+    // useEffect(
+    //     () => {
+    //         if (postId) {
+    //             getPostTagsByPostId(postId)
+    //             .then((data) => {
+    //                 updateTagsOnPost(data)
+    //                 setOriginalPostTags(data)
+    //             })
+    //         }
+    //     },
+    //     [postId]
+    // )
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
@@ -77,18 +77,18 @@ export const PostEdit = () => {
         const removeTagsArray = tagsToRemove.map(t => t.id)
         
         putPost(postId, post)
-            .then(() => {
-                if (tagsToAdd.length > 0) {
-                    postTagRelationships(parseInt(postId), addTagsArray)
-                    console.log(`${tagsToAdd.length} tags added`)
-                }
-            })
-            .then(() => {
-                if (tagsToRemove.length > 0) {
-                    deleteTagRelationships(removeTagsArray)
-                    console.log(`${tagsToRemove.length} tags removed`)
-                }
-            })
+            // .then(() => {
+            //     if (tagsToAdd.length > 0) {
+            //         postTagRelationships(parseInt(postId), addTagsArray)
+            //         console.log(`${tagsToAdd.length} tags added`)
+            //     }
+            // })
+            // .then(() => {
+            //     if (tagsToRemove.length > 0) {
+            //         deleteTagRelationships(removeTagsArray)
+            //         console.log(`${tagsToRemove.length} tags removed`)
+            //     }
+            // })
             .then(() => {
                 navigate(`/posts/${postId}`)
                 //Then they should be directed to that post's detail page with the updated information
@@ -96,58 +96,58 @@ export const PostEdit = () => {
         
     }
 
-    const handleEditTags = (e) => {
-        const checkedTagId = parseInt(e.target.value)
-        console.log("checkedTagId", checkedTagId)
-        const alreadyAdded = tagsToAdd.some(t => t.tag_id === checkedTagId)
-        const alreadyDeleted = tagsToRemove.some(t => t.tag_id === checkedTagId)
-        const currentlyOnPost = tagsOnPost.some(t => t.tag_id === checkedTagId)
-        const originallyOnPost = originalPostTags.some(t => t.tag_id === checkedTagId)
+    // const handleEditTags = (e) => {
+    //     const checkedTagId = parseInt(e.target.value)
+    //     console.log("checkedTagId", checkedTagId)
+    //     const alreadyAdded = tagsToAdd.some(t => t.tag_id === checkedTagId)
+    //     const alreadyDeleted = tagsToRemove.some(t => t.tag_id === checkedTagId)
+    //     const currentlyOnPost = tagsOnPost.some(t => t.tag_id === checkedTagId)
+    //     const originallyOnPost = originalPostTags.some(t => t.tag_id === checkedTagId)
 
-        if (currentlyOnPost) {
-            // Find tag to remove
-            const tagToRemove = tagsOnPost.find(t => t.tag_id === checkedTagId)
-            // Update tagsOnPost
-            const updatedTags = tagsOnPost.filter(t => t.tag_id !== checkedTagId)
-            updateTagsOnPost(updatedTags)
-            // Stage the post_tag for deletion
-            if (originallyOnPost) {
-                const copy = [ ...tagsToRemove ]
-                copy.push(tagToRemove)
-                updateTagsToRemove(copy)
-            }
-            if (alreadyAdded) {
-                // Remove tag from add list
-                const updatedTags = tagsToAdd.filter(t => t.tag_id !== checkedTagId)
-                updateTagsToAdd(updatedTags)
-            }
-        } else { // if not currently on post
-            if (alreadyDeleted) {
-                // Find tag to undo delete
-                const tagToUndoDelete = tagsToRemove.find(t => t.tag_id === checkedTagId)
-                const updatedTags = tagsToRemove.filter(t => t.tag_id !== checkedTagId)
-                updateTagsToRemove(updatedTags)
-                // Add tag back to tagsOnPost
-                const copy = [ ...tagsOnPost ]
-                copy.push(tagToUndoDelete)
-                updateTagsOnPost(copy)
-            } else {
-                // Add a new tag to tagsOnPost
-                const newPostTag = {
-                    id: 0,
-                    post_id: postId,
-                    tag_id: checkedTagId
-                }
-                const tagsOnPostCopy = [ ...tagsOnPost ]
-                tagsOnPostCopy.push(newPostTag)
-                updateTagsOnPost(tagsOnPostCopy)
-                // stage the tag relationship to be added
-                const addedCopy = [ ...tagsToAdd ]
-                addedCopy.push(newPostTag)
-                updateTagsToAdd(addedCopy)
-            }
-        }
-    }
+    //     if (currentlyOnPost) {
+    //         // Find tag to remove
+    //         const tagToRemove = tagsOnPost.find(t => t.tag_id === checkedTagId)
+    //         // Update tagsOnPost
+    //         const updatedTags = tagsOnPost.filter(t => t.tag_id !== checkedTagId)
+    //         updateTagsOnPost(updatedTags)
+    //         // Stage the post_tag for deletion
+    //         if (originallyOnPost) {
+    //             const copy = [ ...tagsToRemove ]
+    //             copy.push(tagToRemove)
+    //             updateTagsToRemove(copy)
+    //         }
+    //         if (alreadyAdded) {
+    //             // Remove tag from add list
+    //             const updatedTags = tagsToAdd.filter(t => t.tag_id !== checkedTagId)
+    //             updateTagsToAdd(updatedTags)
+    //         }
+    //     } else { // if not currently on post
+    //         if (alreadyDeleted) {
+    //             // Find tag to undo delete
+    //             const tagToUndoDelete = tagsToRemove.find(t => t.tag_id === checkedTagId)
+    //             const updatedTags = tagsToRemove.filter(t => t.tag_id !== checkedTagId)
+    //             updateTagsToRemove(updatedTags)
+    //             // Add tag back to tagsOnPost
+    //             const copy = [ ...tagsOnPost ]
+    //             copy.push(tagToUndoDelete)
+    //             updateTagsOnPost(copy)
+    //         } else {
+    //             // Add a new tag to tagsOnPost
+    //             const newPostTag = {
+    //                 id: 0,
+    //                 post_id: postId,
+    //                 tag_id: checkedTagId
+    //             }
+    //             const tagsOnPostCopy = [ ...tagsOnPost ]
+    //             tagsOnPostCopy.push(newPostTag)
+    //             updateTagsOnPost(tagsOnPostCopy)
+    //             // stage the tag relationship to be added
+    //             const addedCopy = [ ...tagsToAdd ]
+    //             addedCopy.push(newPostTag)
+    //             updateTagsToAdd(addedCopy)
+    //         }
+    //     }
+    // }
 
 
     return (
@@ -175,10 +175,10 @@ export const PostEdit = () => {
                 <div className="form-group">
                     <label htmlFor="category" className="label-bold">Category:</label>
                     <select
-                        value={post.category_id}
+                        value={post.category}
                         onChange={(evt) => {
                             const copy = { ...post };
-                            copy.category_id = parseInt(evt.target.value);
+                            copy.category = parseInt(evt.target.value);
                             updatePost(copy);
                         }}
                         className="form-control"
@@ -229,7 +229,7 @@ export const PostEdit = () => {
                 </div>
             </fieldset>
 
-            <fieldset>
+            {/* <fieldset>
                 <h3 className="is-size-5 has-text-weight-bold mt-3">Add Tags to Your Post</h3>
                 <section className="py-2 px-4">
                 {
@@ -249,7 +249,7 @@ export const PostEdit = () => {
                     })
                 }
                 </section>
-            </fieldset>
+            </fieldset> */}
 
             <button
                 onClick={(clickEvent) => { handleSaveButtonClick(clickEvent) }}

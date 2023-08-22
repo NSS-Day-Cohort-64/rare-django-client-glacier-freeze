@@ -12,6 +12,8 @@ export const UserPost = ({ token }) => {
 
   useEffect(() => {
     viewUserPost({ token }).then((postsData) => setUserPosts(postsData)); // Pass token as an object
+    getCategories().then(categoriesData => setCategories(categoriesData))
+
   }, [token]);
 
 
@@ -33,9 +35,9 @@ export const UserPost = ({ token }) => {
   };
 
 
-  const editButton = (post) => {
+  const editButton = (postId) => {
     return (
-      <button onClick={() => { navigate(`/my-posts/${post.id}/edit`) }}>
+      <button onClick={() => { navigate(`/my-posts/${postId}/edit`) }}>
         Edit
       </button>
     )
@@ -48,13 +50,13 @@ export const UserPost = ({ token }) => {
       <article className="posts">
         {userPosts.map((post) => {
           return (
-            <section className="post" key={post.id}>
+            <section className="post" key={post?.id}>
               <div>==============================</div>
               <div> Author: {post?.user?.full_name}</div>
-              <div>Title: {post.title}</div>
+              <div>Title: {post?.title}</div>
               <div>Category: {post?.category?.label}</div>
-              <div>Date: {post.publication_date}</div>
-              <footer>{deleteButton(post.id)}</footer>
+              <div>Date: {post?.publication_date}</div>
+              <footer>{deleteButton(post?.id)}</footer>
               <footer>{editButton(post)}</footer>
 
             </section>

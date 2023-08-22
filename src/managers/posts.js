@@ -44,13 +44,15 @@ export const putPost = (postId, post) => {
     return fetch(`http://localhost:8000/posts/${postId}`, {
         method: "PUT",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
         },
         body: JSON.stringify(post)
     });
 };
 
 export const getPostsByUser = (userId) => {
+        // const userId = parseInt(token);
     return fetch(`http://localhost:8000/posts?user=${userId}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
