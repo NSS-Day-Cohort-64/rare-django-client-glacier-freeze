@@ -1,12 +1,9 @@
 import { Route, Routes } from "react-router-dom"
-import { Login } from "../components/auth/Login"
-import { Register } from "../components/auth/Register"
-import { TagList } from '../components/tag/TagList'
-import { Authorized } from "./Authorized"
+import { TagList } from '../components/tag/StaffTag/TagList'
 import { PostList } from "../components/posts/PostList"
 import { UserPost } from "../components/posts/UserPost"
 import { PostDetails } from "../components/posts/PostDetails"
-import { CategoryList } from "../components/Categories/CategoryList"
+import { CategoryList } from "../components/Categories/StaffCategories/CategoryList"
 import { UserList } from "../components/users/UserList"
 import { PostForm } from "../components/posts/PostForm"
 import { PostEdit } from "../components/posts/PostEdit"
