@@ -29,7 +29,7 @@ export const PostForm = () => {
         publication_date: new Date().toISOString().split('T')[0],
         image_url: "",
         content: "",
-        approved: 0
+        approved: false
     });
 
     useEffect(() => {
@@ -68,7 +68,7 @@ export const PostForm = () => {
             publication_date: post.publication_date, 
             image_url: post.image_url,
             content: post.content,
-            approved: true
+            approved: false
         };
     
         fetch("http://localhost:8000/posts", {

@@ -15,7 +15,8 @@ export const PostList = () => {
     categoryId: 0,
     userId: 0,
     title: "",
-    tagId: 0
+    tagId: 0,
+    approved: false
   });
   const [titleInput, setTitleInput] = useState(""); // New state to track the input field value
 
@@ -135,7 +136,9 @@ export const PostList = () => {
                 Author: <Link to={`/users/${post?.user?.id}`}>{post?.user?.full_name}</Link>
               </div>
               <div>Category: {post?.category?.label}</div>
+              <button>Approve Post</button>
             </section>
+            
           );
         })}
       </article>
