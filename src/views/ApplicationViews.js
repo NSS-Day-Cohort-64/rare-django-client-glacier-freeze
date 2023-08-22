@@ -16,6 +16,7 @@ import { CommentForm } from "../components/comments/CommentForm"
 
 
 import { ReactionList } from "../components/reactions/reactionList.js"
+import { ManagePostTags } from "../components/posts/ManagePostTags"
 
 //import { SubscribedUserPosts } from "../components/subscriptions/ViewSubscribedUserPosts"
 
@@ -30,6 +31,7 @@ export const ApplicationViews = ({ token, setToken}) => {
         <Route path="/" element={<PostList/>}  />
 
         <Route path="/tags" element={<TagList />}  />
+        <Route path="/tags/:postId" element={<ManagePostTags />}  />
         <Route path="/posts" element={<PostList />}  />
         <Route path="/my-posts" element={<UserPost token={token}/>}  />
         <Route path="/posts/:postId" element={<PostDetails />}  />

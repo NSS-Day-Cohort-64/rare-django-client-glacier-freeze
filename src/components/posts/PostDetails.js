@@ -61,7 +61,10 @@ export const PostDetails = () => {
                 <div>Date: {post?.publication_date}</div>
                 <div>Author: <Link to={`/users/${post?.user?.id}`}>{post?.user?.full_name}</Link></div>
                 {post?.user?.id === currentUser?.id ? (
-                    deleteButton(post)
+                    <div>
+                        {deleteButton(post)}
+                        <button onClick={() => { navigate(`/tags/${postId}`) }}>Manage Tags</button>
+                    </div>
                 )
                     : (<div></div>)}
             </article>
