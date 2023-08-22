@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
-import { getTags, deleteTags } from "../../managers/TagManager"
+import { getTags, deleteTags } from "../../../managers/TagManager"
 import { CreateTag } from "./CreateTag"
 import { EditTag } from "./EditTag"
 

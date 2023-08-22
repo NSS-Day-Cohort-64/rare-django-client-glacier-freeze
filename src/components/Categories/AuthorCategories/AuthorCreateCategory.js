@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { postCategories } from "../../managers/categories"
+import { postCategories } from "../../../managers/categories"
 
-export const CreateCategory = ({ updateShowForm, categoryList, updateCategories }) => {
+export const AuthorCreateCategory = ({ updateShowForm, categoryList, updateCategories }) => {
     const [newCategory, updateNewCategory] = useState({ label: "" })
 
     const handleSubmitCategory = (e) => {

@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { postTags } from "../../managers/TagManager"
+import { postTags } from "../../../managers/TagManager"
 
-export const CreateTag = ({ updateShowForm, tagList, updateTags }) => {
+export const AuthorCreateTag = ({ updateShowForm, tagList, updateTags }) => {
     const [newTag, updateNewTag] = useState({label: ""})
 
     const handleSubmitTag = (e) => {
