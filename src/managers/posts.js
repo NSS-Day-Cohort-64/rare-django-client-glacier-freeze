@@ -11,7 +11,8 @@ export const getPostById = (id) => {
         headers: {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
-    }).then(res => res.json());
+    })
+    .then(res => res.json());
 };
 
 export const getPostsByCategory = (categoryId) => {
@@ -22,9 +23,8 @@ export const getPostsByCategory = (categoryId) => {
     }).then(res => res.json());
 };
 
-export const viewUserPost = ({ token }) => {
-    const userId = parseInt(token);
-    return fetch(`http://localhost:8000/posts?user=${userId}`, {
+export const viewUserPost = () => {
+    return fetch(`http://localhost:8000/posts?user=current`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
@@ -41,7 +41,7 @@ export const deletePost = (postId) => {
 };
 
 export const putPost = (postId, post) => {
-    return fetch(`http://localhost:8000/posts/${postId}`, {
+    return fetch(`http://localhost:8000/posts/${post.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,6 @@ export const putPost = (postId, post) => {
 };
 
 export const getPostsByUser = (userId) => {
-        // const userId = parseInt(token);
     return fetch(`http://localhost:8000/posts?user=${userId}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`

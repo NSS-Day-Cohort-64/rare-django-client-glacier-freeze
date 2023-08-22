@@ -11,7 +11,7 @@ export const UserPost = ({ token }) => {
   const { postId } = useParams()
 
   useEffect(() => {
-    viewUserPost({ token }).then((postsData) => setUserPosts(postsData)); // Pass token as an object
+    viewUserPost().then((postsData) => setUserPosts(postsData))
     getCategories().then(categoriesData => setCategories(categoriesData))
 
   }, [token]);
