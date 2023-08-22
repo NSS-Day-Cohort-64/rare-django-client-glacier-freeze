@@ -11,6 +11,8 @@ import { CommentForm } from "../components/comments/CommentForm"
 import { ReactionList } from "../components/reactions/reactionList.js"
 import { AuthorTagList } from "../components/tag/AuthorTag/AuthorTagList.js"
 import { AuthorCategoryList } from "../components/Categories/AuthorCategories/AuthorCategoryList.js"
+import { EditComment } from "../components/comments/CommentEdit.js"
+
 
 export const AuthorViews = ({ token, setToken}) => {
   return <>
