@@ -16,6 +16,7 @@ import { CommentForm } from "../components/comments/CommentForm"
 
 
 import { ReactionList } from "../components/reactions/reactionList.js"
+import { EditComment } from "../components/comments/CommentEdit"
 
 //import { SubscribedUserPosts } from "../components/subscriptions/ViewSubscribedUserPosts"
 
@@ -46,3 +47,5 @@ export const AuthorViews = ({ token, setToken}) => {
     </Routes>
   </>
 }
+
+
