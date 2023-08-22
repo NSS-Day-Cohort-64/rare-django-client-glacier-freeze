@@ -11,6 +11,7 @@ import { UserDetail } from "../components/users/UserDetail"
 import { PostComments } from "../components/comments/PostComments"
 import { CommentForm } from "../components/comments/CommentForm"
 import { ReactionList } from "../components/reactions/reactionList.js"
+import { EditComment } from "../components/comments/CommentEdit"
 
 //import { SubscribedUserPosts } from "../components/subscriptions/ViewSubscribedUserPosts"
 
@@ -33,6 +34,9 @@ export const StaffViews = ({ token, setToken}) => {
         </Route>
         <Route path="/postform" element={<PostForm token={token}/>}  />
         <Route path="/my-posts/:postId/edit" element={<PostEdit />}  />
+        <Route path="/comments/:commentId/edit" element={<EditComment />}  />
+
     </Routes>
   </>
 }
+

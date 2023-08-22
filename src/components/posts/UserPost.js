@@ -1,19 +1,42 @@
 import { useEffect, useState } from "react";
 import { deletePost, viewUserPost } from "../../managers/posts";
-import { getCategories } from "../../managers/categories"
 import { useNavigate, useParams } from "react-router-dom";
+import { getUserByToken } from "../../managers/tokens";
 
 
-export const UserPost = ({ token }) => {
+
+export const UserPost = () => {
   const [userPosts, setUserPosts] = useState([]); // Change 'posts' to 'userPosts'
-  const [categories, setCategories] = useState([])
+  const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
+  const [currentUser, setCurrentUser]= useState()
+  const [filteredUser, setFilterUser] = useState([])
+
+
   const navigate = useNavigate()
   const { postId } = useParams()
+
 
   useEffect(() => {
     viewUserPost({ token }).then((postsData) => setUserPosts(postsData)); // Pass token as an object
   }, [token]);
 
+      useEffect(() => {
+        if (token) {
+            getUserByToken(token).then(data => setCurrentUser(data.user))
+        }
+    }, [token])
+
+
+
+  useEffect(() => {
+    const postsByCurrentUser = userPosts.filter(
+      (postByAuthor) =>
+        postByAuthor.user.id === currentUser.id
+    );
+    setFilterUser(postsByCurrentUser);
+  }, [userPosts, currentUser]);
+  
+  
 
   const deleteButton = (postId) => {
     const handleDelete = () => {
@@ -46,7 +69,7 @@ export const UserPost = ({ token }) => {
     <div style={{ margin: "0rem 3rem" }}>
       <h1>My Posts</h1>
       <article className="posts">
-        {userPosts.map((post) => {
+        {filteredUser.map((post) => {
           return (
             <section className="post" key={post.id}>
               <div>==============================</div>

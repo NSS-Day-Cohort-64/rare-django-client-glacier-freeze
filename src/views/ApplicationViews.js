@@ -20,3 +20,4 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
     </Routes>
   );
 }
+
