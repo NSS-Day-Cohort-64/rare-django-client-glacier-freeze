@@ -31,8 +31,7 @@ export const getPostsByCategory = (categoryId) => {
 };
 
 export const viewUserPost = ({ token }) => {
-    const userId = parseInt(token);
-    return fetch(`http://localhost:8000/posts?user=${userId}`, {
+    return fetch(`http://localhost:8000/posts?user=current`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
