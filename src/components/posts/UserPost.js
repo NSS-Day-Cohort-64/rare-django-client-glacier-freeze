@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { deletePost, viewUserPost } from "../../managers/posts";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getUserByToken } from "../../managers/tokens";
 
 
@@ -74,7 +74,7 @@ export const UserPost = () => {
             <section className="post" key={post.id}>
               <div>==============================</div>
               <div> Author: {post?.user?.full_name}</div>
-              <div>Title: {post.title}</div>
+              <div>Title:<Link to={`/posts/${post.id}`}>{post.title}</Link></div>
               <div>Category: {post?.category?.label}</div>
               <div>Date: {post.publication_date}</div>
               <footer>{deleteButton(post.id)}</footer>

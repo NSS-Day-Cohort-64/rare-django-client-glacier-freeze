@@ -1,12 +1,9 @@
 import { Route, Routes } from "react-router-dom"
-import { Login } from "../components/auth/Login"
-import { Register } from "../components/auth/Register"
-import { TagList } from '../components/tag/TagList'
-import { Authorized } from "./Authorized"
+import { TagList } from '../components/tag/StaffTag/TagList'
 import { PostList } from "../components/posts/PostList"
 import { UserPost } from "../components/posts/UserPost"
 import { PostDetails } from "../components/posts/PostDetails"
-import { CategoryList } from "../components/Categories/CategoryList"
+import { CategoryList } from "../components/Categories/StaffCategories/CategoryList"
 import { UserList } from "../components/users/UserList"
 import { PostForm } from "../components/posts/PostForm"
 import { PostEdit } from "../components/posts/PostEdit"
@@ -15,6 +12,7 @@ import { PostComments } from "../components/comments/PostComments"
 import { CommentForm } from "../components/comments/CommentForm"
 import { ReactionList } from "../components/reactions/reactionList.js"
 import { EditComment } from "../components/comments/CommentEdit"
+import { ManagePostTags } from "../components/posts/ManagePostTags"
 
 //import { SubscribedUserPosts } from "../components/subscriptions/ViewSubscribedUserPosts"
 
@@ -23,6 +21,7 @@ export const StaffViews = ({ token, setToken}) => {
     <Routes>
         <Route path="/" element={<PostList/>}  />
         <Route path="/tags" element={<TagList />}  />
+        <Route path="/tags/:postId" element={<ManagePostTags />}  />
         <Route path="/posts" element={<PostList />}  />
         <Route path="/my-posts" element={<UserPost token={token}/>}  />
         <Route path="/posts/:postId" element={<PostDetails />}  />

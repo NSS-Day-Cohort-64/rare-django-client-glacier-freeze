@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { putTag } from "../../managers/TagManager";
+import { putTag } from "../../../managers/TagManager";
 
 export const EditTag = ({ tag, onCancel, onUpdate }) => {
   const [editedTag, setEditedTag] = useState(tag)
