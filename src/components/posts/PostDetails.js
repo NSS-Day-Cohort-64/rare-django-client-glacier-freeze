@@ -54,12 +54,19 @@ export const PostDetails = () => {
 
     return (
         <div style={{ margin: "0rem 3rem" }}>
-            <h1>{post?.title}</h1>
+            <h1 className="is-size-5 has-text-weight-bold mt-3">{post?.title}</h1>
             <article className="postDetails">
                 <img src={post?.image_url} />
                 <div>{post?.content}</div>
                 <div>Date: {post?.publication_date}</div>
                 <div>Author: <Link to={`/users/${post?.user?.id}`}>{post?.user?.full_name}</Link></div>
+                <div>Tags: <ul>{post?.tags.map((tag)=> {
+                    return (
+                        <li>{tag?.label}</li>
+                        )
+                    })}
+                    </ul>
+                </div>
                 {post?.user?.id === currentUser?.id ? (
                     <div>
                         {deleteButton(post)}
