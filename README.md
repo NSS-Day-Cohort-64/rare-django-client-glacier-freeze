@@ -2,7 +2,6 @@
 
 
 ## Application Overview
-## Application Overview
 Rare is a content management application for users to create/edit/delete posts as well as comment on others' posts via comments, tags, and reactions. To contextualize the content, categories are applied to each post to ensure the users are perusing insights relatable to their interests. As such, admins and authors can create/edit/delete cagegories as well as individual comments, tags, and reactions. To ensure that the content is appropriate, only admins are allowed to edit and delete pre-existing tags and categories. As authors are able to delete their own comments and posts, an individual page will proliferate with the logged in user's posts. The overall purpose of our app is to allow users to interact with like-minded individuals and bond over shared communal interests. Our app is less about managing content than it is about fostering life-long relationships.   
 
 ## Technologies Used
