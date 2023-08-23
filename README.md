@@ -4,7 +4,8 @@
 ## Application Overview
 
 
-
+## Technologies Used
+HTML5 CSS3 JavaScript React Git GitHub JSON Server Visual Studio Code
 ## Getting Started
 
 ### Server Side
