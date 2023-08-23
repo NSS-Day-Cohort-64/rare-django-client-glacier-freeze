@@ -69,5 +69,5 @@ export const UserPost = () => {
       </article>
     </div>
   );
-};
+}
 
