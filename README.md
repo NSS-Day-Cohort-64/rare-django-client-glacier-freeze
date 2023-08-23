@@ -52,7 +52,7 @@ npm install
 ```sh
 npm start
 ```
-3. Login credentials: (Admin = Jonathan Author = Chesney)
+3. Login credentials: (Admin = Jonathan, Author = Chesney)
 ```txt
 username: jonathanislame@aol.com
 password: lemmon
