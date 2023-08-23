@@ -62,7 +62,6 @@ export const UserPost = () => {
               <div>Date: {post.publication_date}</div>
               <footer>{deleteButton(post.id)}</footer>
               <footer>{editButton(post)}</footer>
-              <footer>{editButton(post)}</footer>
 <button>Approve</button>
             </section>
           );
