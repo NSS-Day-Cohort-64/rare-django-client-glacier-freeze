@@ -12,10 +12,10 @@ export const EditTag = ({ tag, onCancel, onUpdate }) => {
   }
 
   const changeGameState = (changeEvent) => {
-       const copy = { ...editedTag }
-            copy.label = changeEvent.target.value
-                setEditedTag(copy)
-    };
+    const copy = { ...editedTag }
+    copy.label = changeEvent.target.value
+    setEditedTag(copy)
+  };
 
   return (
     <div className="edit-tag-form">
@@ -28,7 +28,7 @@ export const EditTag = ({ tag, onCancel, onUpdate }) => {
             id="label"
             name="label"
             value={editedTag?.label}
-            onChange={changeGameState}/>
+            onChange={changeGameState} />
         </div>
         <div className="button-group">
           <button type="submit">Save Changes</button>

@@ -4,7 +4,7 @@ export const getUsers = () => {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
     })
-    .then(res => res.json());
+        .then(res => res.json());
 };
 
 export const getUserById = (id) => {
@@ -13,5 +13,16 @@ export const getUserById = (id) => {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
     })
-    .then(res => res.json());
+        .then(res => res.json());
+};
+
+export const updateUser = (userId, data) => {
+    return fetch(`http://localhost:8000/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${localStorage.getItem('auth_token')}`,
+        },
+        body: JSON.stringify(data), // Send only the updated data
+    });
 };
