@@ -5,7 +5,8 @@
 
 
 ## Technologies Used
-HTML5 CSS3 JavaScript React Git GitHub JSON Server Visual Studio Code
+![image](https://github.com/NSS-Day-Cohort-64/rare-django-client-glacier-freeze/assets/124391732/a0d6b7c0-34de-46c8-8038-f68e4e150682)
+ CSS3 JavaScript React Git GitHub JSON Server Visual Studio Code
 ## Getting Started
 
 ### Server Side
