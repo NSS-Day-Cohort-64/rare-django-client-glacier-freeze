@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getPosts, getPostsByApproval, getPostsByTag} from "../../managers/posts";
+import { getPosts, getPostsByCategory, getPostsByTitle, getPostsByUser, getPostsByTag} from "../../managers/posts";
 import { getUsers } from "../../managers/users";
 import { getCategories } from "../../managers/categories";
 import { Link } from "react-router-dom";
@@ -20,7 +20,7 @@ export const PostList = () => {
   const [titleInput, setTitleInput] = useState(""); // New state to track the input field value
 
   useEffect(() => {
-    getPostsByApproval().then((postsData) => setPosts(postsData));
+    getPosts().then((postsData) => setPosts(postsData));
     getUsers().then((usersData) => setUsers(usersData));
     getCategories().then((categoriesData) => setCategories(categoriesData));
     getTags().then((tagData) => setTags(tagData));
@@ -35,14 +35,14 @@ export const PostList = () => {
 
     if (filters.categoryId !== 0) {
       filteredResults = filteredResults.filter(
-        (post) => post.category_id === filters.categoryId
+        (post) => post?.category?.id === filters.categoryId
       );
     }
  
 
     if (filters.userId !== 0) {
       filteredResults = filteredResults.filter(
-        (post) => post.user_id === filters.userId
+        (post) => post?.user?.id === filters.userId
       );
     }
 
@@ -101,7 +101,7 @@ export const PostList = () => {
           <option value={0}>Filter By Author</option>
           {users.map((user) => (
             <option key={`userFilter--${user.id}`} value={user.id}>
-              {user.first_name} {user.last_name}
+              {user.full_name}
             </option>
           ))}
         </select>

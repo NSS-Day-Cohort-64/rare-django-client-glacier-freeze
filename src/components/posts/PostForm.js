@@ -6,10 +6,7 @@ import { getUserByToken } from "../../managers/tokens";
 
 
 export const PostForm = () => {
-    /*
-        TODO: Add the correct default properties to the
-        initial state object
-    */
+
     const [categories, setCategories] = useState([]);
     const [formError, setFormError] = useState(false);
     const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
@@ -29,7 +26,7 @@ export const PostForm = () => {
         publication_date: new Date().toISOString().split('T')[0],
         image_url: "",
         content: "",
-        approved: 0
+        approved: false
     });
 
     useEffect(() => {
@@ -68,7 +65,7 @@ export const PostForm = () => {
             publication_date: post.publication_date, 
             image_url: post.image_url,
             content: post.content,
-            approved: true
+            approved: false
         };
     
         fetch("http://localhost:8000/posts", {
@@ -91,42 +88,6 @@ export const PostForm = () => {
     }
         
 
-    //     fetch(`http://localhost:8088/posts`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(messageToSendToAPI)
-    //     })
-    //         .then(response => response.json())
-    //         .then((data) => {
-    //             const createdPostId = data.id
-    //             console.log("New Post", data)
-    //             // If tags were selected, create the post/tag relationships with the new post id
-    //             if (tagsOnPost.length > 0) {
-    //                 postTagRelationships(createdPostId, tagsOnPost)
-    //                     .then((postedTags) => {
-    //                         console.log("New tags on post", postedTags)
-    //                         navigate(`/posts/${createdPostId}`)
-    //                     })
-    //             } else {
-    //                 navigate(`/posts/${createdPostId}`);
-    //             }
-    //         });
-    // };
-
-    // const addOrRemoveTag = (e) => {
-    //     const checkedTagId = parseInt(e.target.value)
-    //     console.log("checkedTagId", checkedTagId)
-    //     if (tagsOnPost.includes(checkedTagId)) {
-    //         const updatedTags = tagsOnPost.filter(tagId => tagId !== checkedTagId)
-    //         updateTagsOnPost(updatedTags)
-    //     } else {
-    //         const copy = [ ...tagsOnPost ]
-    //         copy.push(checkedTagId)
-    //         updateTagsOnPost(copy)
-    //     }
-    // }
 
     return (
         <form className="postForm">
