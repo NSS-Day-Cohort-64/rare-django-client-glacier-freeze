@@ -90,16 +90,16 @@ export const PostForm = () => {
 
 
     return (
-        <form className="postForm">
-            <h2 className="postFormHeader">Create a Post</h2>
+        <form className="postForm column">
+            <h2 className="postFormHeader title is-2">Create a Post</h2>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="postHTML" className="postTitle">Title:</label>
+                    <label htmlFor="postHTML" className="postTitle subtitle">Title:</label>
                     <input
                         required autoFocus
                         type="text"
-                        className="form-control"
+                        className="form-control input"
                         placeholder="THINK OF A FUN TITLE"
                         value={post.title}
                         onChange={(evt) => {
@@ -112,7 +112,7 @@ export const PostForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="category" className="label-bold">Category:</label>
+                    <label htmlFor="category" className="label-bold subtitle">Category:</label>
                     <select
                         value={post?.category?.id}
                         onChange={(evt) => {
@@ -120,7 +120,7 @@ export const PostForm = () => {
                             copy.category = parseInt(evt.target.value);
                             update(copy);
                         }}
-                        className="form-control"
+                        className="form-control select "
                     >
                         <option value="0">Select Your Category</option>
                         {categories.map((category) => (
@@ -137,11 +137,11 @@ export const PostForm = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="imagePost" className="imagePost">Image:</label>
+                    <label htmlFor="imagePost" className="imagePost subtitle">Image:</label>
                     <input
                         required 
                         type="text"
-                        className="form-control"
+                        className="form-control input"
                         value={post.image_url}
                         onChange={(evt) => {
                             const copy = { ...post };
@@ -153,42 +153,22 @@ export const PostForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="content" className="contentPost">Content:</label>
-                    <input
+                    <label htmlFor="content" className="contentPost subtitle">Content:</label>
+                    <textarea
                         required 
                         type="text"
-                        className="form-control"
+                        className="textarea"
+                        rows= "10"
                         value={post.content}
                         onChange={(evt) => {
                             const copy = { ...post };
                             copy.content = evt.target.value;
                             update(copy);
                         }}
-                    />
+                    ></textarea>
                 </div>
             </fieldset>
 
-            {/* <fieldset>
-                <h3 className="is-size-5 has-text-weight-bold mt-3">Add Tags to Your Post</h3>
-                <section className="py-2 px-4">
-                {
-                    tagList.length > 0 &&
-                    tagList.map((tag) => {
-                        return <div key={`tagCheck--${tag.id}`}>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    value={tag.id}
-                                    checked={tagsOnPost.includes(tag.id)}
-                                    onChange={(e) => addOrRemoveTag(e)}
-                                />
-                                {tag.label}
-                            </label>
-                        </div>
-                    })
-                }
-                </section>
-            </fieldset> */}
 
             <button
                 onClick={(clickEvent) => { handleSaveButtonClick(clickEvent) }}

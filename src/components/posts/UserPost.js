@@ -49,12 +49,12 @@ export const UserPost = () => {
 
 
   return (
-    <div style={{ margin: "0rem 3rem" }}>
-      <h1>My Posts</h1>
+    <div className="column" style={{ margin: "0rem 3rem" }}>
+      <h1 className="title">My Posts</h1>
       <article className="posts">
         {userPosts.map((post) => {
           return (
-            <section className="post" key={post.id}>
+            <section className="post column" key={post.id}>
               <div>==============================</div>
               <div> Author: {post?.user?.full_name}</div>
               <div>Title:<Link to={`/posts/${post.id}`}>{post.title}</Link></div>

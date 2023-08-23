@@ -83,11 +83,11 @@ export const PostList = () => {
   };
 
   return (
-    <div style={{ margin: "0rem 3rem" }}>
-      <h1>Posts</h1>
+    <div className="column"style={{ margin: "0rem 3rem" }}>
+      <h1 className="title">Posts</h1>
       <div className="form-group">
-        <label htmlFor="category">Category: </label>
-        <select name="category" className="form-control" onChange={handleCategoryChange}>
+        <label htmlFor="category" className="subtitle">Category: </label>
+        <select name="category" className="form-control select" onChange={handleCategoryChange}>
           <option value={0}>Select a category</option>
           {categories.map((category) => (
             <option key={`catFilter--${category.id}`} value={category.id}>
@@ -96,8 +96,8 @@ export const PostList = () => {
           ))}
         </select>
 
-        <label htmlFor="filterByUser">Author: </label>
-        <select name="filterByUser" className="form-control" onChange={handleAuthorChange}>
+        <label htmlFor="filterByUser" className="subtitle">Author: </label>
+        <select name="filterByUser" className="form-control select" onChange={handleAuthorChange}>
           <option value={0}>Filter By Author</option>
           {users.map((user) => (
             <option key={`userFilter--${user.id}`} value={user.id}>
@@ -112,8 +112,9 @@ export const PostList = () => {
           <button onClick={handleTitleSubmit}>Search</button>
         </div>
       </div>
-            
-        <label htmlFor="tag">Tag: </label>
+
+       {/* Filter by tag is not set up for this version yet 
+         <label htmlFor="tag">Tag: </label>
         <select name="tag" className="form-control" onChange={handleTagChange}>
           <option value={0}>Select a tag</option>
           {tags.map((tag) => (
@@ -121,7 +122,7 @@ export const PostList = () => {
               {tag.label}
             </option>
           ))}
-        </select>
+        </select> */}
 
       <article className="posts">
         {filteredPosts.map((post) => {
