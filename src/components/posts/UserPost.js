@@ -8,33 +8,16 @@ import { getUserByToken } from "../../managers/tokens";
 export const UserPost = () => {
   const [userPosts, setUserPosts] = useState([]); // Change 'posts' to 'userPosts'
   const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
-  const [currentUser, setCurrentUser]= useState()
   const [filteredUser, setFilterUser] = useState([])
-
-
   const navigate = useNavigate()
-  const { postId } = useParams()
+
 
 
   useEffect(() => {
     viewUserPost({ token }).then((postsData) => setUserPosts(postsData)); // Pass token as an object
-  }, [token]);
-
-      useEffect(() => {
-        if (token) {
-            getUserByToken(token).then(data => setCurrentUser(data.user))
-        }
-    }, [token])
+  }, []);
 
 
-
-  useEffect(() => {
-    const postsByCurrentUser = userPosts.filter(
-      (postByAuthor) =>
-        postByAuthor.user.id === currentUser.id
-    );
-    setFilterUser(postsByCurrentUser);
-  }, [userPosts, currentUser]);
   
   
 
@@ -66,12 +49,12 @@ export const UserPost = () => {
 
 
   return (
-    <div style={{ margin: "0rem 3rem" }}>
-      <h1>My Posts</h1>
+    <div className="column" style={{ margin: "0rem 3rem" }}>
+      <h1 className="title">My Posts</h1>
       <article className="posts">
-        {filteredUser.map((post) => {
+        {userPosts.map((post) => {
           return (
-            <section className="post" key={post.id}>
+            <section className="post column" key={post.id}>
               <div>==============================</div>
               <div> Author: {post?.user?.full_name}</div>
               <div>Title:<Link to={`/posts/${post.id}`}>{post.title}</Link></div>
@@ -88,3 +71,4 @@ export const UserPost = () => {
     </div>
   );
 };
+

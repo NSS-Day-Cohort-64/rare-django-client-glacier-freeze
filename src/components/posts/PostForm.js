@@ -6,10 +6,7 @@ import { getUserByToken } from "../../managers/tokens";
 
 
 export const PostForm = () => {
-    /*
-        TODO: Add the correct default properties to the
-        initial state object
-    */
+
     const [categories, setCategories] = useState([]);
     const [formError, setFormError] = useState(false);
     const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
@@ -29,7 +26,7 @@ export const PostForm = () => {
         publication_date: new Date().toISOString().split('T')[0],
         image_url: "",
         content: "",
-        approved: 0
+        approved: false
     });
 
     useEffect(() => {
@@ -68,7 +65,7 @@ export const PostForm = () => {
             publication_date: post.publication_date, 
             image_url: post.image_url,
             content: post.content,
-            approved: true
+            approved: false
         };
     
         fetch("http://localhost:8000/posts", {
@@ -91,54 +88,18 @@ export const PostForm = () => {
     }
         
 
-    //     fetch(`http://localhost:8088/posts`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(messageToSendToAPI)
-    //     })
-    //         .then(response => response.json())
-    //         .then((data) => {
-    //             const createdPostId = data.id
-    //             console.log("New Post", data)
-    //             // If tags were selected, create the post/tag relationships with the new post id
-    //             if (tagsOnPost.length > 0) {
-    //                 postTagRelationships(createdPostId, tagsOnPost)
-    //                     .then((postedTags) => {
-    //                         console.log("New tags on post", postedTags)
-    //                         navigate(`/posts/${createdPostId}`)
-    //                     })
-    //             } else {
-    //                 navigate(`/posts/${createdPostId}`);
-    //             }
-    //         });
-    // };
-
-    // const addOrRemoveTag = (e) => {
-    //     const checkedTagId = parseInt(e.target.value)
-    //     console.log("checkedTagId", checkedTagId)
-    //     if (tagsOnPost.includes(checkedTagId)) {
-    //         const updatedTags = tagsOnPost.filter(tagId => tagId !== checkedTagId)
-    //         updateTagsOnPost(updatedTags)
-    //     } else {
-    //         const copy = [ ...tagsOnPost ]
-    //         copy.push(checkedTagId)
-    //         updateTagsOnPost(copy)
-    //     }
-    // }
 
     return (
-        <form className="postForm">
-            <h2 className="postFormHeader">Create a Post</h2>
+        <form className="postForm column">
+            <h2 className="postFormHeader title is-2">Create a Post</h2>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="postHTML" className="postTitle">Title:</label>
+                    <label htmlFor="postHTML" className="postTitle subtitle">Title:</label>
                     <input
                         required autoFocus
                         type="text"
-                        className="form-control"
+                        className="form-control input"
                         placeholder="THINK OF A FUN TITLE"
                         value={post.title}
                         onChange={(evt) => {
@@ -151,7 +112,7 @@ export const PostForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="category" className="label-bold">Category:</label>
+                    <label htmlFor="category" className="label-bold subtitle">Category:</label>
                     <select
                         value={post?.category?.id}
                         onChange={(evt) => {
@@ -159,7 +120,7 @@ export const PostForm = () => {
                             copy.category = parseInt(evt.target.value);
                             update(copy);
                         }}
-                        className="form-control"
+                        className="form-control select "
                     >
                         <option value="0">Select Your Category</option>
                         {categories.map((category) => (
@@ -176,11 +137,11 @@ export const PostForm = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="imagePost" className="imagePost">Image:</label>
+                    <label htmlFor="imagePost" className="imagePost subtitle">Image:</label>
                     <input
                         required 
                         type="text"
-                        className="form-control"
+                        className="form-control input"
                         value={post.image_url}
                         onChange={(evt) => {
                             const copy = { ...post };
@@ -192,42 +153,22 @@ export const PostForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="content" className="contentPost">Content:</label>
-                    <input
+                    <label htmlFor="content" className="contentPost subtitle">Content:</label>
+                    <textarea
                         required 
                         type="text"
-                        className="form-control"
+                        className="textarea"
+                        rows= "10"
                         value={post.content}
                         onChange={(evt) => {
                             const copy = { ...post };
                             copy.content = evt.target.value;
                             update(copy);
                         }}
-                    />
+                    ></textarea>
                 </div>
             </fieldset>
 
-            {/* <fieldset>
-                <h3 className="is-size-5 has-text-weight-bold mt-3">Add Tags to Your Post</h3>
-                <section className="py-2 px-4">
-                {
-                    tagList.length > 0 &&
-                    tagList.map((tag) => {
-                        return <div key={`tagCheck--${tag.id}`}>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    value={tag.id}
-                                    checked={tagsOnPost.includes(tag.id)}
-                                    onChange={(e) => addOrRemoveTag(e)}
-                                />
-                                {tag.label}
-                            </label>
-                        </div>
-                    })
-                }
-                </section>
-            </fieldset> */}
 
             <button
                 onClick={(clickEvent) => { handleSaveButtonClick(clickEvent) }}

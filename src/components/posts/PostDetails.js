@@ -10,6 +10,7 @@ import { getUserByToken } from "../../managers/tokens"
 export const PostDetails = () => {
     const { postId } = useParams()
     const [post, setPost] = useState({})
+    const [tagsOnPost, setTags] = useState([])
     const [users, setUsers] = useState([])
     const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
     const [currentUser, setCurrentUser]= useState()
@@ -26,6 +27,11 @@ export const PostDetails = () => {
             getPostById(postId).then(PostDetails => setPost(PostDetails))
         }
     }, [postId])
+    useEffect(() => {
+        if (post.id) {
+            setTags(post.tags)
+        }
+    }, [post])
 
     useEffect(() => {
         if (token) {
@@ -60,7 +66,7 @@ export const PostDetails = () => {
                 <div>{post?.content}</div>
                 <div>Date: {post?.publication_date}</div>
                 <div>Author: <Link to={`/users/${post?.user?.id}`}>{post?.user?.full_name}</Link></div>
-                <div>Tags: <ul>{post?.tags.map((tag)=> {
+                <div>Tags: <ul>{tagsOnPost.map((tag)=> {
                     return (
                         <li>{tag?.label}</li>
                         )

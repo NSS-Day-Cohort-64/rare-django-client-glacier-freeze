@@ -85,7 +85,7 @@ export const CategoryList = () => {
   return (
     <article className="is-flex is-justify-content-space-evenly">
       <section className="categories">
-        <h2 className="categoryList">List of Categories</h2>
+        <h2 className="categoryList title">List of Categories</h2>
         {categoryList
           .sort((a, b) => a.label.localeCompare(b.label))
           .map((category) => (
