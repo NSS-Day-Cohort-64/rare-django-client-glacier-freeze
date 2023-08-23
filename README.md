@@ -53,11 +53,16 @@ npm install
 npm start
 ```
 3. Login credentials:
+   Admin
 ```txt
 username: jonathanislame@aol.com
 password: lemmon
 ```
-
+    Author
+```txt
+username: chesney@farmersmeet.com
+password: lemmon
+```
 
 ## ERD
 
