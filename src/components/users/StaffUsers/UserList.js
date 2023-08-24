@@ -26,9 +26,9 @@ export const UserList = () => {
 
   return (
     <>
-      <h2 className="userList">List of Users</h2>
+      <h2 className="userList title">List of Users</h2>
 
-      <article className="users">
+      <article className="users column">
         {users
           .sort((a, b) => a.full_name.localeCompare(b.full_name))
           .map((user) => (
@@ -39,9 +39,6 @@ export const UserList = () => {
                 Full Name: <Link to={`/users/${user.id}`}>{user.full_name}</Link>
               </div>
               <div className="userEmail">Email: {user?.user?.email} </div>
-              <button onClick={() => toggleUserStatus(user.id, user.active)}>
-                {user.active ? "Deactivate" : "Reactivate"}
-              </button>
             </section>
           ))}
       </article>

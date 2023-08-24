@@ -14,7 +14,7 @@ export const AuthorUserList = () => {
     <>
       <h2 className="userList">List of Users</h2>
 
-      <article className="users">
+      <article className="users column">
         {users
           .sort((a, b) => a.full_name.localeCompare(b.full_name))
           .map((user) => (

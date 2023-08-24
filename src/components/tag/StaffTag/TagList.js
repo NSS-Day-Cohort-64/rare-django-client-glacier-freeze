@@ -54,10 +54,10 @@ export const TagList = () => {
 
   return (
     <article className="is-flex is-justify-content-space-evenly">
-      <div style={{ margin: "0rem 3rem" }} className="column is-two-thirds">
-        <h1>Tags</h1>
+      <div style={{ margin: "0rem 3rem" }} className="column ">
+        <h1 className="title">Tags</h1>
 
-        <div className="tags column is-full is-justify-content-space-evenly">
+        <div className="tags">
           {tags.map((tag) => (
             <section className="tag" key={tag?.id}>
               <div className="tagLabel">{tag?.label}</div>
